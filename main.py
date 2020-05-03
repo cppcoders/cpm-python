@@ -1,5 +1,8 @@
 import numpy as np
 import pandas as pd
+import networkx as nx
+import matplotlib.pyplot as plt
+
 start = []
 graph = []
 atts = []
@@ -72,3 +75,12 @@ for i in path:
 for j in range(len(graph)):
     print(atts[j])
 print()
+# ------------------------------------------------
+G = nx.DiGraph()
+
+for i in range(len(graph)):
+    for j in graph[i]:
+        G.add_edge(chr(i+65), chr(j+65))
+plt.figure(figsize=(9, 9))
+nx.draw_spectral(G, with_labels=True, font_weight='bold')
+plt.show()
