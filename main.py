@@ -96,5 +96,5 @@ for i in range(len(graph)):
     for j in graph[i]:
         G.add_edge(chr(i+65), chr(j+65))
 plt.figure(figsize=(9, 9))
-nx.draw_spectral(G, with_labels=True, font_weight='bold')
+nx.draw_spring(G, with_labels=True, font_weight='bold')
 plt.show()
