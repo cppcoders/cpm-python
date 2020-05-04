@@ -50,7 +50,13 @@ print()
 print("Path")
 
 BFS(start, graph)
-path = [x for y, x in sorted(zip(level, path))]
+#path = [x for y, x in sorted(zip(level, path))]
+# ---bubble sort !!!!!
+for i in range(len(path)):
+    for j in range(0, len(path)-i-1):
+        if level[j] > level[j+1]:
+            path[j], path[j+1] = path[j+1], path[j]
+            level[j], level[j+1] = level[j+1], level[j]
 
 for s in path:
     print(str(chr(s+65)), " ", level[s])
