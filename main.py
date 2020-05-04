@@ -7,7 +7,7 @@ start = []
 graph = []
 atts = []
 path = []
-data = pd.read_csv("data4.csv")
+data = pd.read_csv("data5.csv")
 for i in range(len(data)):
     graph.append([])
     atts.append({})
@@ -21,43 +21,60 @@ for j in range(len(data)):
         graph[ord(data.iloc[j, 1][k]) -
               65].append(ord(data.iloc[j, 0])-65)
 
+level = [None] * (len(graph))
+
 
 def BFS(s, graph):
     visited = [False] * (len(graph))
     queue = []
     for i in s:
         queue.append(i)
+        level[i] = 0
         visited[i] = True
     while queue:
         s = queue.pop(0)
-        print(str(chr(s+65)), end=' ')
         path.append(s)
-        # -------------Forward--------------------
-        if(data.iloc[s, 1] == "-"):
-            atts[s]["ES"] = 0
-        else:
-            ls = []
-            for k in range(len(data.iloc[s, 1])):
-                ls.append(atts[ord(data.iloc[s, 1][k]) - 65]["EF"])
-            atts[s]["ES"] = max(ls)
-        atts[s]["EF"] = atts[s]["DU"] + atts[s]["ES"]
-
-        # ---------------------------------
         for i in graph[s]:
             if visited[i] == False:
                 queue.append(i)
+                level[i] = level[s] + 1
                 visited[i] = True
+            else:
+                level[i] = max(level[s]+1, level[i])
 
+
+for i in graph:
+    print(i)
 
 print()
 print("Path")
+
 BFS(start, graph)
+path = [x for y, x in sorted(zip(level, path))]
+
+for s in path:
+    print(str(chr(s+65)), " ", level[s])
+    '''
+    # -------------Forward--------------------
+    if(data.iloc[s, 1] == "-"):
+        atts[s]["ES"] = 0
+    else:
+        ls = []
+        for k in range(len(data.iloc[s, 1])):
+            ls.append(atts[ord(data.iloc[s, 1][k]) - 65]["EF"])
+        atts[s]["ES"] = max(ls)
+    atts[s]["EF"] = atts[s]["DU"] + atts[s]["ES"]
+    '''
+    # ---------------------------------
+'''
 for i in range(len(graph)):
     if(graph[i] == []):
         atts[i]["LF"] = atts[i]["EF"]
         atts[i]["LS"] = atts[i]["ES"]
 print()
 print("------------------------")
+'''
+'''
 # --------------------backward
 path.reverse()
 for i in path:
@@ -71,11 +88,13 @@ for i in path:
                      65]["LF"] = atts[i]["LS"]
             atts[ord(data.iloc[i, 1][k]) - 65]["LS"] = atts[ord(data.iloc[i, 1]
                                                                 [k]) - 65]["LF"] - atts[ord(data.iloc[i, 1][k]) - 65]["DU"]
+'''
 # ----------------------------------------
 for j in range(len(graph)):
     print(atts[j])
 print()
 # ------------------------------------------------
+'''
 G = nx.DiGraph()
 
 for i in range(len(graph)):
@@ -84,3 +103,4 @@ for i in range(len(graph)):
 plt.figure(figsize=(9, 9))
 nx.draw_spectral(G, with_labels=True, font_weight='bold')
 plt.show()
+'''

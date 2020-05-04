@@ -1,0 +1,1 @@
+print(str(chr(s+65)), " ", level[s])

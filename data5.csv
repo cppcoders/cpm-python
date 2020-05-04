@@ -1,0 +1,15 @@
+ac,pr,du
+A,-,7
+B,A,7
+C,B,14
+D,A,14
+E,D,14
+F,D,14
+G,E,21
+H,F,7
+I,G,7
+J,CH,1
+K,E,7
+L,E,7
+M,L,7
+N,IJKM,7
