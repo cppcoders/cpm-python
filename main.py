@@ -43,24 +43,18 @@ def BFS(s, graph):
                 level[i] = max(level[s]+1, level[i])
 
 
-for i in graph:
-    print(i)
+BFS(start, graph)
 
+levels = [None] * len(path)
+for i in range(len(path)):
+    levels[i] = level[path[i]]
+path = [x for y, x in sorted(zip(levels, path))]
 print()
 print("Path")
-
-BFS(start, graph)
-#path = [x for y, x in sorted(zip(level, path))]
-# ---bubble sort !!!!!
-for i in range(len(path)):
-    for j in range(0, len(path)-i-1):
-        if level[j] > level[j+1]:
-            path[j], path[j+1] = path[j+1], path[j]
-            level[j], level[j+1] = level[j+1], level[j]
-
+for i in path:
+    print(str(chr(i+65)), end=' ')
 for s in path:
-    print(str(chr(s+65)), " ", level[s])
-    '''
+    #print(str(chr(s+65)), " ", level[s])
     # -------------Forward--------------------
     if(data.iloc[s, 1] == "-"):
         atts[s]["ES"] = 0
@@ -70,17 +64,14 @@ for s in path:
             ls.append(atts[ord(data.iloc[s, 1][k]) - 65]["EF"])
         atts[s]["ES"] = max(ls)
     atts[s]["EF"] = atts[s]["DU"] + atts[s]["ES"]
-    '''
     # ---------------------------------
-'''
+
 for i in range(len(graph)):
     if(graph[i] == []):
         atts[i]["LF"] = atts[i]["EF"]
         atts[i]["LS"] = atts[i]["ES"]
 print()
 print("------------------------")
-'''
-'''
 # --------------------backward
 path.reverse()
 for i in path:
@@ -94,13 +85,11 @@ for i in path:
                      65]["LF"] = atts[i]["LS"]
             atts[ord(data.iloc[i, 1][k]) - 65]["LS"] = atts[ord(data.iloc[i, 1]
                                                                 [k]) - 65]["LF"] - atts[ord(data.iloc[i, 1][k]) - 65]["DU"]
-'''
 # ----------------------------------------
 for j in range(len(graph)):
     print(atts[j])
 print()
 # ------------------------------------------------
-'''
 G = nx.DiGraph()
 
 for i in range(len(graph)):
@@ -109,4 +98,3 @@ for i in range(len(graph)):
 plt.figure(figsize=(9, 9))
 nx.draw_spectral(G, with_labels=True, font_weight='bold')
 plt.show()
-'''
