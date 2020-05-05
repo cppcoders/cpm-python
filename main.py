@@ -1,9 +1,7 @@
 import numpy as np
 import pandas as pd
 import networkx as nx
-from graphviz import Digraph
 import matplotlib.pyplot as plt
-
 start = []
 graph = []
 atts = []
@@ -91,11 +89,28 @@ for j in range(len(graph)):
     print(atts[j])
 print()
 # ------------------------------------------------
-G = Digraph("CPM", engine='dot')
-G.attr('node', shape='box')
-for i in range(len(graph)):
-    G.node(chr(i+65))
+G2 = nx.DiGraph()
+
 for i in range(len(graph)):
     for j in graph[i]:
-        G.edge(chr(i+65), chr(j+65))
-G.view()
+        G2.add_edge(chr(i+65), chr(j+65))
+temp = []
+for i in range(len(atts)):
+    temp.append(atts[i]["Name"])
+temp = dict(zip(temp, atts))
+nx.set_node_attributes(G2, temp)
+fig, ax = plt.subplots(figsize=(12, 12))
+pos = nx.nx_agraph.graphviz_layout(G2, prog='dot')
+#nx.draw(G2, pos=pos, ax=ax, with_labels=True, font_weight='bold')
+nx.draw_networkx_edges(G2, pos, edge_color='green', width=3, arrowstyle='-|>')
+nx.draw_networkx_nodes(G2, pos, node_size=300,
+                       node_color='lightskyblue', ax=ax,)
+nx.draw_networkx_labels(G2, pos, ax=ax)
+for node in G2.nodes:
+    xy = pos[node]
+    node_attr = G2.nodes[node]
+    text = '\n'.join(f'{k}: {v}' for k, v in G2.nodes[node].items())
+    ax.annotate(text, xy=xy, xytext=(80, 5), textcoords="offset points",
+                bbox=dict(boxstyle="round", fc="lightgrey"),
+                arrowprops=dict(arrowstyle="wedge"))
+plt.show()
