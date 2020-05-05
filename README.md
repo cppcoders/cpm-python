@@ -21,6 +21,31 @@ This is a python program that
 
 | Activity | Predecessors | Duration |
 | -------- | ------------ | -------- |
+| A        | -            | 7        |
+| B        | A            | 9        |
+| C        | A            | 3        |
+| D        | B            | 8        |
+| E        | C            | 5        |
+| F        | C            | 4        |
+| G        | D E F        | 2        |
+| H        | G            | 1        |
+
+## ![fig1](/images/fig1.png)
+
+| Activity | Predecessors | Duration |
+| -------- | ------------ | -------- |
+| A        | -            | 5        |
+| B        | -            | 4        |
+| C        | A            | 7        |
+| D        | A            | 3        |
+| E        | B            | 2        |
+| F        | D            | 9        |
+| G        | B C          | 8        |
+
+## ![fig2](/images/fig2.png)
+
+| Activity | Predecessors | Duration |
+| -------- | ------------ | -------- |
 | A        | -            | 3        |
 | B        | A            | 4        |
 | C        | A            | 2        |

@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
-for q in range(3, 7):
+for q in range(1, 7):
     start = []
     graph = []
     atts = []

@@ -1,8 +1,8 @@
-ac,pr
-A,-
-B,-
-C,A
-D,A
-E,B
-F,D
-G,BC
+ac,pr,du
+A,-,5
+B,-,4
+C,A,7
+D,A,3
+E,B,2
+F,D,9
+G,BC,8
