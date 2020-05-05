@@ -6,7 +6,7 @@ start = []
 graph = []
 atts = []
 path = []
-data = pd.read_csv("data5.csv")
+data = pd.read_csv("data4.csv")
 for i in range(len(data)):
     graph.append([])
     atts.append({})
@@ -102,10 +102,22 @@ nx.set_node_attributes(G2, temp)
 fig, ax = plt.subplots(figsize=(12, 12))
 pos = nx.nx_agraph.graphviz_layout(G2, prog='dot')
 #nx.draw(G2, pos=pos, ax=ax, with_labels=True, font_weight='bold')
-nx.draw_networkx_edges(G2, pos, edge_color='green', width=3, arrowstyle='-|>')
-nx.draw_networkx_nodes(G2, pos, node_size=300,
-                       node_color='lightskyblue', ax=ax,)
-nx.draw_networkx_labels(G2, pos, ax=ax)
+nx.draw_networkx_edges(G2, pos, edge_color='olive',
+                       width=1, arrowstyle='simple', arrowsize=20, min_source_margin=25, min_target_margin=25)
+crt = []
+notcrt = []
+for i in atts:
+    if(i["LF"] == i["EF"]):
+        crt.append(i["Name"])
+    else:
+        notcrt.append(i["Name"])
+nx.draw_networkx_nodes(G2, pos, node_size=1000,
+                       node_color='seagreen', ax=ax, nodelist=crt)
+nx.draw_networkx_nodes(G2, pos, node_size=1000,
+                       node_color='wheat', ax=ax, nodelist=notcrt)
+nx.draw_networkx_labels(G2, pos, ax=ax, font_weight="bold",
+                        font_color="w", font_size=16)
+
 for node in G2.nodes:
     xy = pos[node]
     node_attr = G2.nodes[node]
