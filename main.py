@@ -6,7 +6,7 @@ start = []
 graph = []
 atts = []
 path = []
-data = pd.read_csv("data4.csv")
+data = pd.read_csv("data/data5.csv")
 for i in range(len(data)):
     graph.append([])
     atts.append({})
@@ -99,7 +99,7 @@ for i in range(len(atts)):
     temp.append(atts[i]["Name"])
 temp = dict(zip(temp, atts))
 nx.set_node_attributes(G2, temp)
-fig, ax = plt.subplots(figsize=(12, 12))
+fig, ax = plt.subplots(figsize=(15, 15))
 pos = nx.nx_agraph.graphviz_layout(G2, prog='dot')
 #nx.draw(G2, pos=pos, ax=ax, with_labels=True, font_weight='bold')
 nx.draw_networkx_edges(G2, pos, edge_color='olive',
@@ -122,7 +122,9 @@ for node in G2.nodes:
     xy = pos[node]
     node_attr = G2.nodes[node]
     text = '\n'.join(f'{k}: {v}' for k, v in G2.nodes[node].items())
-    ax.annotate(text, xy=xy, xytext=(80, 5), textcoords="offset points",
+    ax.annotate(text, xy=xy, xytext=(50, 5), textcoords="offset points",
                 bbox=dict(boxstyle="round", fc="lightgrey"),
                 arrowprops=dict(arrowstyle="wedge"))
+ax.axis('off')
+plt.savefig('images/fig5.png')
 plt.show()
