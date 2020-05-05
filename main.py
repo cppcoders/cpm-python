@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import networkx as nx
+from graphviz import Digraph
 import matplotlib.pyplot as plt
 
 start = []
@@ -90,11 +91,11 @@ for j in range(len(graph)):
     print(atts[j])
 print()
 # ------------------------------------------------
-G = nx.DiGraph()
-
+G = Digraph("CPM", engine='dot')
+G.attr('node', shape='box')
+for i in range(len(graph)):
+    G.node(chr(i+65))
 for i in range(len(graph)):
     for j in graph[i]:
-        G.add_edge(chr(i+65), chr(j+65))
-plt.figure(figsize=(9, 9))
-nx.draw_spring(G, with_labels=True, font_weight='bold')
-plt.show()
+        G.edge(chr(i+65), chr(j+65))
+G.view()
