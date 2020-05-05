@@ -52,7 +52,7 @@ for q in range(3, 7):
     for i in path:
         print(str(chr(i+65)), end=' ')
     for s in path:
-        #print(str(chr(s+65)), " ", level[s])
+        # print(str(chr(s+65)), " ", level[s])
         # -------------Forward--------------------
         if(data.iloc[s, 1] == "-"):
             atts[s]["ES"] = 0
@@ -101,7 +101,7 @@ for q in range(3, 7):
     nx.set_node_attributes(G2, temp)
     fig, ax = plt.subplots(figsize=(15, 15))
     pos = nx.nx_agraph.graphviz_layout(G2, prog='dot')
-    #nx.draw(G2, pos=pos, ax=ax, with_labels=True, font_weight='bold')
+    # nx.draw(G2, pos=pos, ax=ax, with_labels=True, font_weight='bold')
     nx.draw_networkx_edges(G2, pos, edge_color='olive',
                            width=1, arrowstyle='simple', arrowsize=20, min_source_margin=25, min_target_margin=25)
     crt = []
@@ -116,12 +116,17 @@ for q in range(3, 7):
     nx.draw_networkx_nodes(G2, pos, node_size=1000,
                            node_color='wheat', ax=ax, nodelist=notcrt)
     nx.draw_networkx_labels(G2, pos, ax=ax, font_weight="bold",
-                            font_color="w", font_size=16)
+                            font_color="black", font_size=16)
 
+    def without(d, keys={"Name"}):
+        return {x: d[x] for x in d if x not in keys}
     for node in G2.nodes:
         xy = pos[node]
         node_attr = G2.nodes[node]
-        text = '\n'.join(f'{k}: {v}' for k, v in G2.nodes[node].items())
+        d = G2.nodes[node]
+        d = without(d)
+        text = '\n'.join(f'{k}: {v}' for k,
+                         v in d.items())
         ax.annotate(text, xy=xy, xytext=(50, 5), textcoords="offset points",
                     bbox=dict(boxstyle="round", fc="lightgrey"),
                     arrowprops=dict(arrowstyle="wedge"))
