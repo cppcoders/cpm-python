@@ -83,8 +83,7 @@ for q in range(3, 7):
                          65]["LF"] = atts[i]["LS"]
                 atts[ord(data.iloc[i, 1][k]) - 65]["LS"] = atts[ord(data.iloc[i, 1]
                                                                     [k]) - 65]["LF"] - atts[ord(data.iloc[i, 1][k]) - 65]["DU"]
-                atts[ord(data.iloc[i, 1][k]) - 65]["SK"] = atts[ord(data.iloc[i, 1]
-                                                                    [k]) - 65]["LF"] - atts[ord(data.iloc[i, 1][k]) - 65]["EF"]
+        atts[i]["SK"] = atts[i]["LF"] - atts[i]["EF"]
     # ----------------------------------------
     for j in range(len(graph)):
         print(atts[j])
@@ -128,4 +127,4 @@ for q in range(3, 7):
                     arrowprops=dict(arrowstyle="wedge"))
     ax.axis('off')
     plt.savefig('images/fig'+str(q)+".png")
-    plt.show()
+    # plt.show()
