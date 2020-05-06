@@ -7,7 +7,23 @@ for q in range(1, 7):
     graph = []
     atts = []
     path = []
+    new = []
+    st = ""
     data = pd.read_csv("data/data"+str(q)+".csv")
+    last = data.iloc[-1, 0]
+    last = chr(ord(last)+1)
+    # -------------------------------------------
+    for j in range(len(data)):
+        for k in range(len(data.iloc[j, 1])):
+            if data.iloc[j, 1][k] != '-':
+                new.append(data.iloc[j, 1][k])
+    # -------------------------------------------
+    for j in range(len(data)):
+        if not data.iloc[j, 0] in new:
+            st = st+data.iloc[j, 0]
+    # ------------------------------------------
+    df = pd.DataFrame([[last, st, 0]], columns=["ac", "pr", "du"])
+    data = data.append(df)
     for i in range(len(data)):
         graph.append([])
         atts.append({})
@@ -40,7 +56,7 @@ for q in range(1, 7):
                     visited[i] = True
                 else:
                     level[i] = max(level[s]+1, level[i])
-
+    print(graph)
     BFS(start, graph)
 
     levels = [None] * len(path)
