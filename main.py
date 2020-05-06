@@ -56,7 +56,6 @@ for q in range(1, 7):
                     visited[i] = True
                 else:
                     level[i] = max(level[s]+1, level[i])
-    print(graph)
     BFS(start, graph)
 
     levels = [None] * len(path)
@@ -101,6 +100,7 @@ for q in range(1, 7):
                                                                     [k]) - 65]["LF"] - atts[ord(data.iloc[i, 1][k]) - 65]["DU"]
         atts[i]["SK"] = atts[i]["LF"] - atts[i]["EF"]
     # ----------------------------------------
+    atts[-1]["Name"] = "End"
     for j in range(len(graph)):
         print(atts[j])
     print()
@@ -109,7 +109,7 @@ for q in range(1, 7):
 
     for i in range(len(graph)):
         for j in graph[i]:
-            G2.add_edge(chr(i+65), chr(j+65))
+            G2.add_edge(atts[i]["Name"], atts[j]["Name"])
     temp = []
     for i in range(len(atts)):
         temp.append(atts[i]["Name"])
@@ -122,12 +122,12 @@ for q in range(1, 7):
                            width=1, arrowstyle='simple', arrowsize=20, min_source_margin=25, min_target_margin=25)
     crt = []
     notcrt = []
-    for i in atts:
+    for j, i in temp.items():
         if(i["LF"] == i["EF"]):
-            crt.append(i["Name"])
+            crt.append(j)
         else:
-            notcrt.append(i["Name"])
-    nx.draw_networkx_nodes(G2, pos, node_size=1000,
+            notcrt.append(j)
+    nx.draw_networkx_nodes(G2, pos, node_size=2000,
                            node_color='seagreen', ax=ax, nodelist=crt)
     nx.draw_networkx_nodes(G2, pos, node_size=1000,
                            node_color='wheat', ax=ax, nodelist=notcrt)
