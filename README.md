@@ -130,7 +130,7 @@ This is a python program that
 
 ## ![fig6](/images/fig8.png)
 
-#Calculating Duration From Optimistic, Most probable and Pessimistic Time
+# Calculating Duration From Optimistic, Most probable and Pessimistic Time
 
 | Activity | Predecessors | Optimistic Time | Most probable Time | Pessimistic Time |
 | -------- | ------------ | --------------- | ------------------ | ---------------- |
