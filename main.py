@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
-for q in range(1, 7):
+for q in range(1, 10):
     start = []
     graph = []
     atts = []
@@ -22,14 +22,22 @@ for q in range(1, 7):
         if not data.iloc[j, 0] in new:
             st = st+data.iloc[j, 0]
     # ------------------------------------------
-    df = pd.DataFrame([[last, st, 0]], columns=["ac", "pr", "du"])
+    if data.shape[1] == 3:
+        df = pd.DataFrame([[last, st, 0]], columns=["ac", "pr", "du"])
+    else:
+        df = pd.DataFrame([[last, st, 0, 0, 0]], columns=[
+                          "ac", "pr", "b", "m", "a"])
     data = data.append(df)
     for i in range(len(data)):
         graph.append([])
         atts.append({})
     for j in range(len(data)):
         atts[j]["Name"] = data.iloc[j, 0]
-        atts[j]["DU"] = data.iloc[j, 2]
+        if data.shape[1] == 3:
+            atts[j]["DU"] = data.iloc[j, 2]
+        else:
+            atts[j]["DU"] = (data.iloc[j, 4] + 4 *
+                             data.iloc[j, 3] + data.iloc[j, 2]) / 6
         if(data.iloc[j, 1] == "-"):
             start.append(ord(data.iloc[j, 0])-65)
             continue

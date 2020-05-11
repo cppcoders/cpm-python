@@ -102,6 +102,53 @@ This is a python program that
 
 ## ![fig6](/images/fig6.png)
 
+| Activity | Predecessors | Duration |
+| -------- | ------------ | -------- |
+| A        | -            | 16       |
+| B        | -            | 20       |
+| C        | -            | 30       |
+| D        | B            | 15       |
+| E        | B            | 10       |
+| F        | D            | 3        |
+| G        | D            | 16       |
+| H        | A            | 15       |
+| I        | E F          | 12       |
+
+## ![fig6](/images/fig7.png)
+
+| Activity | Predecessors | Duration |
+| -------- | ------------ | -------- |
+| A        | -            | 8        |
+| B        | -            | 2        |
+| C        | A            | 5        |
+| D        | B            | 4        |
+| E        | C D          | 6        |
+| F        | E            | 7        |
+| G        | D            | 7        |
+| H        | G            | 5        |
+| I        | E            | 6        |
+
+## ![fig6](/images/fig8.png)
+
+#Calculating Duration From Optimistic, Most probable and Pessimistic Time
+
+| Activity | Predecessors | Optimistic Time | Most probable Time | Pessimistic Time |
+| -------- | ------------ | --------------- | ------------------ | ---------------- |
+| A        | -            | 6               | 9                  | 12               |
+| B        | A            | 3               | 4                  | 11               |
+| C        | A            | 2               | 5                  | 14               |
+| D        | B C          | 4               | 6                  | 8                |
+| E        | C            | 1               | 1.5                | 5                |
+| F        | E            | 5               | 6                  | 7                |
+| G        | D            | 7               | 8                  | 15               |
+| H        | B            | 1               | 2                  | 3                |
+
+## ![fig6](/images/fig9.png)
+
+| Variance | 7.22222222 |
+| Standard Deviation | 2.68741925 |
+| Propability on 26 day | 4.9% |
+
 Used Tools:
 
 - Python -obviously-
